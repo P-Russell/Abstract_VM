@@ -1,0 +1,28 @@
+
+//Creation of new operands via factory method
+IOperand const * createOperand( eOperandType type, std::string const & value ) const;
+
+//operand type is an enum defining the following values: Int8, Int16, Int32, Float, Double
+
+
+//Depending on the enum passes as a prameter, the member function createOperand
+//creates a new IOperand by callinf one of the following private member functions
+IOperand const * createInt8( std::string const & value ) const;
+IOperand const * createInt16( std::string const & value ) const;
+IOperand const * createInt32( std::string const & value ) const;
+IOperand const * createFloat( std::string const & value ) const;
+IOperand const * createDouble( std::string const & value ) const;
+
+//Pointers to these functions must be stored as in an array. With enum values as index.
+
+
+
+// Precision
+// int8 < int16 < int32 < Float < Double
+// These values can be stored as an enum, as enum values evaluate to integers
+
+
+// Stack
+// Must only contain pointers to the abstrac type IOperand
+
+
