@@ -14,8 +14,7 @@ public:
 		this->_precision = rhs._precision;
 		return *this;
 	};
-	Operand<T>(const Operand & rhs) : _value(rhs._value), _precision(rhs._precision) {
-	}
+	Operand<T>(const Operand & rhs) : _value(rhs._value), _precision(rhs._precision) {}
 
 	virtual int getPrecision(void) const { return this->_precision; }
 

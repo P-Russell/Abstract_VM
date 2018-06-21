@@ -14,7 +14,7 @@ NONE = \x1b[0m
 OK = \x1b[32;01m
 WARN = \x1b[33;01m
 
-all: $(BUILDDIR)/$(NAME)
+all: $(BUILDDIR)/$(NAME) run
 
 $(BUILDDIR)/$(NAME):
 	if [ ! -d "$(BUILDDIR)" ]; then \
@@ -40,4 +40,4 @@ fclean:
 re: fclean all
 
 run:
-	./$(BUILDDIR)/$(NAME)
+	valgrind --leak-check=full ./$(BUILDDIR)/$(NAME)
