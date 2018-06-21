@@ -17,33 +17,34 @@ public:
 	Operand<T>(const Operand & rhs) : _value(rhs._value), _precision(rhs._precision) {
 	}
 
-	int getPrecision(void) const { return this->_precision; }
+	virtual int getPrecision(void) const { return this->_precision; }
 
-	T getValue(void) { return _value; }
+	T getValue(void) const { return _value; }
 
 
-	IOperand const * operator + (IOperand const & rhs) const {
+	virtual IOperand const * operator + (IOperand const & rhs) const {
+		//handel overflow/underflow
+		const Operand &tmp = dynamic_cast<const Operand &>(rhs);
+		return new Operand(this->getValue() + tmp.getValue());
+	}
+	virtual IOperand const * operator - (IOperand const & rhs) const {
 		(void)rhs;
 		return this;
 	}
-	IOperand const * operator - (IOperand const & rhs) const {
+	virtual IOperand const * operator * (IOperand const & rhs) const {
 		(void)rhs;
 		return this;
 	}
-	IOperand const * operator * (IOperand const & rhs) const {
+	virtual IOperand const * operator / (IOperand const & rhs) const {
 		(void)rhs;
 		return this;
 	}
-	IOperand const * operator / (IOperand const & rhs) const {
-		(void)rhs;
-		return this;
-	}
-	IOperand const * operator % (IOperand const & rhs) const {
+	virtual IOperand const * operator % (IOperand const & rhs) const {
 		(void)rhs;
 		return this;
 	}
 
-	std::string const & toString(void) const
+	virtual std::string const & toString(void) const
 	{
 		std::stringstream ss;
 		ss << "Address: " << this;
