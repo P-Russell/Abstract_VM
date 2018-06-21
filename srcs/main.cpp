@@ -4,13 +4,15 @@
 */
 
 #include <cstdlib>
-#include "Operand.hpp"
+#include "Operand.tmp.hpp"
 #include "eOperandType.hpp"
 
 int main ()
 {
-	
-	Operand<int> *op1 = new Operand<int>(34);	
+	Operand<int> *op = new Operand<int>(34, eOperandType::INT_16);
+	(void)op;
+	/*
+	Operand<int> *op1 = new Operand<int>(34, eOperandType(eOperandType::INT16);	
 	Operand<int> *op2 = new Operand<int>(24);
 
 	const Operand<int> *sum = dynamic_cast<const Operand<int> *>(*op1 + *op2);
@@ -42,6 +44,6 @@ int main ()
 	c = f;
 	std::cout << "g: " << g.getType() << " c: " << c.getType() << std::endl;
 	std::cout << "-----------------------------------" << std::endl;
-
+*/
 	return 0;
 }
