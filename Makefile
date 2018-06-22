@@ -1,6 +1,12 @@
 NAME = avm 
 
-SRCS =	srcs/*.cpp
+SRCS =	$(wildcard srcs/*.cpp)
+
+TESTFILES = $(wildcard tests/*.cpp)
+
+TESTDIR = tests
+
+TESTSRCS := $(filter-out srcs/main.cpp, $(SRCS))
 
 HEADERDIR = includes
 
@@ -41,3 +47,12 @@ re: fclean all
 
 run:
 	valgrind --leak-check=full ./$(BUILDDIR)/$(NAME)
+
+test:
+	@echo "$(OK)----------   Compile $(NAME)    ----------$(NONE)"
+	@$(COMPILER) -o $(TESTDIR)/$(NAME) $(TESTSRCS) $(TESTFILES) $(FLAGS)$(HEADERDIR)
+	@echo "$(OK)----------     Success     ----------$(NONE)\n"
+
+runtest:
+	valgrind --leak-check=full ./$(TESTDIR)/$(NAME)
+

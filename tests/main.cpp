@@ -6,14 +6,26 @@
 #include <cstdlib>
 #include "Operand.tmp.hpp"
 #include "eOperandType.hpp"
+#include "Comp.tmp.hpp"
+
+void testMaxeOperand()
+{
+	std::cout << "-------------testMaxeOperand--------------" << std::endl;
+	eOperandType o1(eOperandType::INT_16);
+	eOperandType o2(eOperandType::INT_32);
+
+	std::cout << "Max between INT_16 and INT_32 is " << Comp::max(o1, o2).getType() << std::endl;
+}
 
 int main ()
 {
+	testMaxeOperand();
+	/*
 	Operand<int> *op = new Operand<int>(34, eOperandType::INT_16);
 	delete op;
-	/*
-	Operand<int> *op1 = new Operand<int>(34, eOperandType(eOperandType::INT16);	
-	Operand<int> *op2 = new Operand<int>(24);
+	
+	Operand<int> *op1 = new Operand<int>(34, eOperandType(eOperandType::INT_16));
+	Operand<int> *op2 = new Operand<int>(24, eOperandType::INT_32);
 
 	const Operand<int> *sum = dynamic_cast<const Operand<int> *>(*op1 + *op2);
 	std::cout << "-------------Plus Operator--------------" << std::endl;
@@ -44,6 +56,6 @@ int main ()
 	c = f;
 	std::cout << "g: " << g.getType() << " c: " << c.getType() << std::endl;
 	std::cout << "-----------------------------------" << std::endl;
-*/
+	*/
 	return 0;
 }

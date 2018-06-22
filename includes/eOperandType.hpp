@@ -16,7 +16,7 @@ class eOperandType {
 		eOperandType(const eOperandType & rhs) : _type(rhs._type) {}
 		eOperandType & operator = (const eOperandType & rhs);
 		eOperandType & operator = (const int & rhs);
-		int getType(void);
+		int getType(void) const;
 		void setType(int type);	
 		bool operator==( eOperandType const & rhs );
 		bool operator!=( eOperandType const & rhs ); 

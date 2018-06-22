@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <algorithm>
+#include "Comp.tmp.hpp"
 #include "IOperand.hpp"
 #include "eOperandType.hpp"
 
@@ -37,11 +37,11 @@ public:
 	virtual IOperand const * operator + (IOperand const & rhs) const {
 		//handel overflow/underflow
 		const Operand &tmp = dynamic_cast<const Operand &>(rhs);
-//			return new Operand(this->getValue() + tmp.getValue(), std::max(tmp.getType(), this->getType()));
-		if (tmp.getType() > this->getType())
+		return new Operand(this->getValue() + tmp.getValue(), Comp::max(tmp.getType(), this->getType()));
+/*		if (tmp.getType() > this->getType())
 			return new Operand(this->getValue() + tmp.getValue(), tmp.getType());
 		return new Operand(this->getValue() + tmp.getValue(), this->getType());
-
+*/
 	}
 	virtual IOperand const * operator - (IOperand const & rhs) const {
 		(void)rhs;
