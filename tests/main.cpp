@@ -7,6 +7,7 @@
 #include "Operand.tmp.hpp"
 #include "eOperandType.hpp"
 #include "Comp.tmp.hpp"
+#include <climits>
 
 void testMaxeOperand()
 {
@@ -17,45 +18,55 @@ void testMaxeOperand()
 	std::cout << "Max between INT_16 and INT_32 is " << Comp::max(o1, o2).getType() << std::endl;
 }
 
+void testIntOverFlow()
+{
+	std::cout << "-------------TestIntOverFlow1--------------" << std::endl;
+	Operand<int8_t> *op1 = new Operand<int8_t>(CHAR_MAX, eOperandType::INT_8);
+	Operand<int8_t> *op2 = new Operand<int8_t>(34, eOperandType::INT_8);
+	try {	
+		const Operand<int8_t> *ret = dynamic_cast<Operand<int8_t> const * >(*op1 + *op2);
+		delete ret;
+	}
+	catch (std::exception & e) {
+		std::cout << e.what() << std::endl;
+	}
+
+	delete op1;
+	delete op2;
+	
+	std::cout << "-------------TestIntOverFlow2--------------" << std::endl;
+	Operand<int8_t> *op3 = new Operand<int8_t>(CHAR_MIN, eOperandType::INT_8);
+	Operand<int8_t> *op4 = new Operand<int8_t>(-34, eOperandType::INT_8);
+	try {	
+		const Operand<int8_t> *ret = dynamic_cast<Operand<int8_t> const * >(*op3 + *op4);
+		delete ret;
+	}
+	catch (std::exception & e) {
+		std::cout << e.what() << std::endl;
+	}
+
+	delete op3;
+	delete op4;
+	
+	std::cout << "-------------TestIntOverFlow3--------------" << std::endl;
+	Operand<int8_t> *op5 = new Operand<int8_t>(20, eOperandType::INT_8);
+	Operand<int8_t> *op6 = new Operand<int8_t>(22, eOperandType::INT_8);
+	try {	
+		const Operand<int8_t> *ret = dynamic_cast<Operand<int8_t> const * >(*op5 + *op6);
+		std::cout << "result of 20 + 22 is: " << static_cast<int>(ret->getValue()) << std::endl;
+		delete ret;
+	}
+	catch (std::exception & e) {
+		std::cout << e.what() << std::endl;
+	}
+
+	delete op5;
+	delete op6;
+}
+
 int main ()
 {
 	testMaxeOperand();
-	
-	Operand<int> *op = new Operand<int>(34, eOperandType::INT_16);
-	delete op;
-	
-	Operand<int> *op1 = new Operand<int>(34, eOperandType(eOperandType::INT_16));
-	Operand<int> *op2 = new Operand<int>(24, eOperandType::INT_32);
-
-	const Operand<int> *sum = dynamic_cast<const Operand<int> *>(*op1 + *op2);
-	std::cout << "-------------Plus Operator--------------" << std::endl;
-
-
-	std::cout << "Op2:  " << op1->getPrecision() << " " << op1->getValue() << std::endl;
-	std::cout << "Op1:  " << op2->getPrecision() << " " << op2->getValue() << std::endl;
-	std::cout << "Sum:  " << sum->getPrecision() << " " << sum->getValue() << std::endl;
-	delete sum;
-	delete op1;
-	delete op2;
-
-	std::cout << "int8_t: " << sizeof(int8_t) << std::endl; 
-	std::cout << "int16_t: " << sizeof(int16_t) << std::endl; 
-	std::cout << "int32_t: " << sizeof(int32_t) << std::endl; 
-	std::cout << "float: " << sizeof(float) << std::endl; 
-	std::cout << "double: " << sizeof(double) << std::endl; 
-
-		
-	eOperandType e(eOperandType::INT_32);
-	eOperandType f;
-
-	std::cout << "e: " << e.getType() << " f: " << f.getType() << std::endl; 
-	
-	eOperandType g = e;
-	eOperandType c;
-
-	c = f;
-	std::cout << "g: " << g.getType() << " c: " << c.getType() << std::endl;
-	std::cout << "-----------------------------------" << std::endl;
-	
+	testIntOverFlow();
 	return 0;
 }

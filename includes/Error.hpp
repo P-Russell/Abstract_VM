@@ -6,13 +6,13 @@ class Error {
 		class Negative : public std::exception {
 			public:
 				virtual const char* what() const throw() {
-						return "given a negative number.";
+					return "given a negative number.";
 				}
 		};
 		class Positive : public std::exception {
 			public:
 				virtual const char* what() const throw() {
-						return "given a postive number.";
+					return "given a postive number.";
 				}
 		};
 		virtual const char* what() const throw() { 
@@ -36,4 +36,5 @@ int main() {
 	catch (std::exception & e) {
 		std::cout << e.what() << std::endl;
 	}
-}*/
+}
+*/

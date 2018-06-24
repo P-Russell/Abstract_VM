@@ -20,7 +20,7 @@ NONE = \x1b[0m
 OK = \x1b[32;01m
 WARN = \x1b[33;01m
 
-all: $(BUILDDIR)/$(NAME) run
+all: $(BUILDDIR)/$(NAME)
 
 $(BUILDDIR)/$(NAME):
 	if [ ! -d "$(BUILDDIR)" ]; then \
@@ -46,13 +46,12 @@ fclean:
 re: fclean all
 
 run:
-	valgrind --leak-check=full ./$(BUILDDIR)/$(NAME)
-
+	./$(BUILDDIR)/$(NAME)
 test:
 	@echo "$(OK)----------   Compile $(NAME)    ----------$(NONE)"
 	@$(COMPILER) -o $(TESTDIR)/$(NAME) $(TESTSRCS) $(TESTFILES) $(FLAGS)$(HEADERDIR)
 	@echo "$(OK)----------     Success     ----------$(NONE)\n"
 
 runtest:
-	valgrind --leak-check=full ./$(TESTDIR)/$(NAME)
+	./$(TESTDIR)/$(NAME)
 
