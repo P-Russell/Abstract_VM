@@ -20,7 +20,7 @@ void testMaxeOperand()
 int main ()
 {
 	testMaxeOperand();
-	/*
+	
 	Operand<int> *op = new Operand<int>(34, eOperandType::INT_16);
 	delete op;
 	
@@ -56,6 +56,6 @@ int main ()
 	c = f;
 	std::cout << "g: " << g.getType() << " c: " << c.getType() << std::endl;
 	std::cout << "-----------------------------------" << std::endl;
-	*/
+	
 	return 0;
 }

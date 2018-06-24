@@ -1,5 +1,5 @@
-#ifndef OPERAND_HPP
-#define OPERAND_HPP
+#ifndef OPERAND_TMP_HPP
+#define OPERAND_TMP_HPP
 
 #include <iostream>
 #include <sstream>
@@ -34,15 +34,16 @@ public:
 
 	T getValue(void) const { return _value; }
 
-	virtual IOperand const * operator + (IOperand const & rhs) const {
+	virtual IOperand const * operator + (IOperand const & rhs) const;
+	/*virtual IOperand const * operator + (IOperand const & rhs) const {
 		//handel overflow/underflow
 		const Operand &tmp = dynamic_cast<const Operand &>(rhs);
-		return new Operand(this->getValue() + tmp.getValue(), Comp::max(tmp.getType(), this->getType()));
-/*		if (tmp.getType() > this->getType())
-			return new Operand(this->getValue() + tmp.getValue(), tmp.getType());
-		return new Operand(this->getValue() + tmp.getValue(), this->getType());
-*/
-	}
+		if (tmp.getType() > this->getType())
+			return new Operand(this->getValue() + 
+				tmp.getValue(), tmp.getType());
+		return new Operand(this->getValue() + 
+			tmp.getValue(), this->getType());
+	}*/
 	virtual IOperand const * operator - (IOperand const & rhs) const {
 		(void)rhs;
 		return this;
@@ -76,4 +77,5 @@ private:
 	eOperandType _type;
 };
 
+#include "../srcs/Operand.add.cpp"
 #endif
