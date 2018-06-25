@@ -18,9 +18,11 @@ class Operand : public IOperand {
 		Operand<T>(void) {}
 		Operand<T>(T value, int type): _value(value), _precision(sizeof(value)) {
 			this->_type.setType(type);
+			this->_valueString = std::to_string(this->_value);
 		}					
 		Operand<T>(T value, eOperandType type): _value(value), _precision(sizeof(value)) {
 			this->_type = type;
+			this->_valueString = std::to_string(this->_value);
 		}					
 		~Operand<T>(void) {}
 
@@ -39,11 +41,11 @@ class Operand : public IOperand {
 		T getValue(void) const { return _value; }
 
 		virtual IOperand const * operator + (IOperand const & rhs) const;
-		virtual IOperand const * operator - (IOperand const & rhs) const;
-		virtual IOperand const * operator * (IOperand const & rhs) const;
-		virtual IOperand const * operator / (IOperand const & rhs) const;
-		virtual IOperand const * operator % (IOperand const & rhs) const;
-
+		virtual IOperand const * operator - (IOperand const & rhs) const {(void)rhs; return this; }
+		virtual IOperand const * operator * (IOperand const & rhs) const {(void)rhs; return this; }
+		virtual IOperand const * operator / (IOperand const & rhs) const {(void)rhs; return this; }
+		virtual IOperand const * operator % (IOperand const & rhs) const {(void)rhs; return this; }
+/*
 		virtual std::string const & toString(void) const
 		{
 			std::stringstream ss;
@@ -53,17 +55,28 @@ class Operand : public IOperand {
 			const std::string *ret = new std::string(ss.str());
 			return *ret;
 		}
-
+*/
+/*		virtual std::string const & toString(void) const
+		{
+			std::stringstream ss;
+			ss << this->_value;
+			const std::string *ret = new std::string(ss.str());
+			return *ret;
+		}
+*/
+		virtual std::string const & toString(void) const { return this->_valueString; }
 	private:
 		T _value;
 		int _precision;
 		eOperandType _type;
+		std::string _valueString;
 };
 
 #include "Operand.add.hpp"
+/*
 #include "Operand.subtract.hpp"
 #include "Operand.multiply.hpp"
 #include "Operand.divide.hpp"
 #include "Operand.modulo.hpp"
-
+*/
 #endif

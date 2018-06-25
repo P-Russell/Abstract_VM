@@ -12,7 +12,7 @@ HEADERDIR = includes
 
 BUILDDIR = build
 
-FLAGS = -Wall -Werror -Wextra -iquote
+FLAGS = -std=c++11 -Wall -Werror -Wextra -iquote
 
 COMPILER = clang++
 

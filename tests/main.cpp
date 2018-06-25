@@ -14,13 +14,18 @@ void addDiffTypes()
 	std::cout << "-------------AddDiffTypes--------------" << std::endl;
 	Operand<int16_t> *op1 = new Operand<int16_t>(20, eOperandType::INT_32);
 	Operand<int32_t> *op2 = new Operand<int32_t>(5, eOperandType::INT_32);
+	std::cout << "this is the value string " << op2->toString() << std::endl;
+	Operand<double> *op3 = new Operand<double>(25.2369, eOperandType::DOUBLE);
+	std::cout << "this is the value string " << op3->toString() << std::endl;
+	delete op2;
 	try {
-		const Operand<int32_t> *plus = dynamic_cast<Operand<int32_t> const * >(*op1 + *op2);
-		std::cout << "result of 20 + 5 is: " << static_cast<int>(plus->getValue()) << std::endl;
+		const Operand<double> *plus = dynamic_cast<Operand<double> const * >(*op1 + *op3);
+		std::cout << "result of 20 + 5 is: " << plus->toString() << std::endl;
 	} catch (std::exception & e) {
 		std::cout << "Exception in addDiffTypes: " << e.what() << std::endl;
 	}
 }
+/*
 void testOperators()
 {
 	std::cout << "-------------testOperators--------------" << std::endl;
@@ -169,12 +174,14 @@ void testDoubleOverflow()
 	delete op7;
 	delete op8;
 }
+*/
+
 int main ()
 {
-	testMaxeOperand();
+/*	testMaxeOperand();
 	testIntOverflow();
 	testDoubleOverflow();
-	testOperators();
+	testOperators(); */
 	addDiffTypes();
 	return 0;
 }

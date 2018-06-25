@@ -1,1 +1,1 @@
-Assert the data type sizes
+when creating and operand instance - check that number fits inside type
