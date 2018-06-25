@@ -1,1 +1,1 @@
-Makefile checks if build directory exists. If not creates it
+Assert the data type sizes

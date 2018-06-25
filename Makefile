@@ -52,6 +52,6 @@ test:
 	@$(COMPILER) -o $(TESTDIR)/$(NAME) $(TESTSRCS) $(TESTFILES) $(FLAGS)$(HEADERDIR)
 	@echo "$(OK)----------     Success     ----------$(NONE)\n"
 
-runtest:
+runt:
 	./$(TESTDIR)/$(NAME)
 

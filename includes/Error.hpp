@@ -3,16 +3,16 @@
 
 class Error {
 	public:
-		class Negative : public std::exception {
+		class divide_by_zero : public std::exception {
 			public:
 				virtual const char* what() const throw() {
-					return "given a negative number.";
+					return "divide by zero";
 				}
 		};
-		class Positive : public std::exception {
+		class invalid_arguments_for_operation : public std::exception {
 			public:
 				virtual const char* what() const throw() {
-					return "given a postive number.";
+					return "invalid arguments for % operator. Expected discrete values";
 				}
 		};
 		virtual const char* what() const throw() { 

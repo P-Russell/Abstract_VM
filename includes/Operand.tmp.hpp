@@ -2,10 +2,14 @@
 #define OPERAND_TMP_HPP
 
 #include <iostream>
+#include <cfloat>
+#include <limits>
+#include <stdexcept>
+#include <climits>
 #include <sstream>
-#include "Comp.tmp.hpp"
 #include "IOperand.hpp"
 #include "eOperandType.hpp"
+#include "Error.hpp"
 
 template <class T>
 class Operand : public IOperand {
@@ -35,23 +39,10 @@ class Operand : public IOperand {
 		T getValue(void) const { return _value; }
 
 		virtual IOperand const * operator + (IOperand const & rhs) const;
-
-		virtual IOperand const * operator - (IOperand const & rhs) const {
-			(void)rhs;
-			return this;
-		}
-		virtual IOperand const * operator * (IOperand const & rhs) const {
-			(void)rhs;
-			return this;
-		}
-		virtual IOperand const * operator / (IOperand const & rhs) const {
-			(void)rhs;
-			return this;
-		}
-		virtual IOperand const * operator % (IOperand const & rhs) const {
-			(void)rhs;
-			return this;
-		}
+		virtual IOperand const * operator - (IOperand const & rhs) const;
+		virtual IOperand const * operator * (IOperand const & rhs) const;
+		virtual IOperand const * operator / (IOperand const & rhs) const;
+		virtual IOperand const * operator % (IOperand const & rhs) const;
 
 		virtual std::string const & toString(void) const
 		{
@@ -70,10 +61,9 @@ class Operand : public IOperand {
 };
 
 #include "Operand.add.hpp"
-/*
-#include "../srcs/Operand.subtract.cpp"
-#include "../srcs/Operand.multiply.cpp"
-#include "../srcs/Operand.divide.cpp"
-#include "../srcs/Operand.modulo.cpp"
-*/
+#include "Operand.subtract.hpp"
+#include "Operand.multiply.hpp"
+#include "Operand.divide.hpp"
+#include "Operand.modulo.hpp"
+
 #endif
