@@ -10,9 +10,13 @@
 #include <cstdlib>
 #include <string>
 #include <cmath>
+
 #include "IOperand.hpp"
 #include "eOperandType.hpp"
 #include "Error.hpp"
+#include "Factory.hpp"
+
+class Factory;
 
 template <class T>
 class Operand : public IOperand {
@@ -44,10 +48,10 @@ class Operand : public IOperand {
 		T getValue(void) const { return _value; }
 
 		virtual IOperand const * operator + (IOperand const & rhs) const;
-		virtual IOperand const * operator - (IOperand const & rhs) const;
-		virtual IOperand const * operator * (IOperand const & rhs) const;
-		virtual IOperand const * operator / (IOperand const & rhs) const;
-		virtual IOperand const * operator % (IOperand const & rhs) const;
+		virtual IOperand const * operator - (IOperand const & rhs) const {(void) rhs; return this; }
+		virtual IOperand const * operator * (IOperand const & rhs) const {(void) rhs; return this; }
+		virtual IOperand const * operator / (IOperand const & rhs) const {(void) rhs; return this; }
+		virtual IOperand const * operator % (IOperand const & rhs) const {(void) rhs; return this; }
 		
 		virtual std::string const & toString(void) const { return this->_valueString; }
 
@@ -56,13 +60,14 @@ class Operand : public IOperand {
 		int _precision;
 		eOperandType _type;
 		std::string _valueString;
+		Factory factory;
 };
 
 #include "Operand.add.hpp"
-
+/*
 #include "Operand.subtract.hpp"
 #include "Operand.multiply.hpp"
 #include "Operand.divide.hpp"
 #include "Operand.modulo.hpp"
-
+*/
 #endif
