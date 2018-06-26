@@ -35,3 +35,4 @@ avm
 build/
 *.swp
 tests/avm
+trash
