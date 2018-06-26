@@ -7,8 +7,6 @@
 template< class T >
 IOperand const * Operand<T>::operator + (IOperand const & rhs) const {
 
-	eOperandType test = rhs.getType();
-
 	eOperandType resultType;
 	if (rhs.getType() > this->getType()) 
 		resultType = rhs.getType();
@@ -50,10 +48,10 @@ IOperand const * Operand<T>::operator + (IOperand const & rhs) const {
 		float rhsF = std::stof(rhs.toString());
 		if ((rhsF > 0) && (rhsF > FLT_MAX - this->_value))
 			throw std::overflow_error("Overflow occured");
-		else if ((rhsF < 0) && (rhsF < -FLT_MAX - this->_value))
+		else if ((rhsF < 0) && (rhsF < -FLT_MAX + 1 - this->_value))
 			throw std::underflow_error("Underflow occured");
-		else if ((rhsF < 0) && (rhsF < FLT_MIN - this->_value))
-			throw std::underflow_error("Underflow occured");
+		//else if ((rhsF < 0) && (rhsF < FLT_MIN - this->_value))
+		//	throw std::underflow_error("Underflow occured");
 
 		return new Operand<float>(this->_value + rhsF, resultType);
 	}
@@ -61,10 +59,10 @@ IOperand const * Operand<T>::operator + (IOperand const & rhs) const {
 	double rhsD = std::stod(rhs.toString());
 	if ((rhsD > 0) && (rhsD > DBL_MAX - this->_value))
 		throw std::overflow_error("Overflow occured");
-	else if ((rhsD < 0) && (rhsD < -DBL_MAX - this->_value))
+	else if ((rhsD < 0) && (rhsD < -DBL_MAX + 1 - this->_value))
 		throw std::underflow_error("Underflow occured");
-	else if ((rhsD < 0) && (rhsD < DBL_MIN - this->_value))
-		throw std::underflow_error("Underflow occured");
+	//else if ((rhsD < 0) && (rhsD < DBL_MIN - this->_value))
+	//	throw std::underflow_error("Underflow occured");
 
 	return new Operand<double>(this->_value + rhsD, resultType);
 

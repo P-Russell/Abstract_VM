@@ -25,7 +25,7 @@ void addDiffTypes()
 		std::cout << "Exception in addDiffTypes: " << e.what() << std::endl;
 	}
 }
-/*
+
 void testOperators()
 {
 	std::cout << "-------------testOperators--------------" << std::endl;
@@ -131,7 +131,7 @@ void testDoubleOverflow()
 	delete op2;
 	
 	std::cout << "-------------TestDoubelOverFlow2--------------" << std::endl;
-	Operand<double> *op3 = new Operand<double>(-20, eOperandType::DOUBLE);
+	Operand<double> *op3 = new Operand<double>(-1, eOperandType::DOUBLE);
 	Operand<double> *op4 = new Operand<double>(-DBL_MAX, eOperandType::DOUBLE);
 	try {	
 		const Operand<double> *ret = dynamic_cast<Operand<double> const * >(*op1 + *op2);
@@ -174,14 +174,14 @@ void testDoubleOverflow()
 	delete op7;
 	delete op8;
 }
-*/
+
 
 int main ()
 {
-/*	testMaxeOperand();
+	testMaxeOperand();
 	testIntOverflow();
 	testDoubleOverflow();
-	testOperators(); */
+	testOperators(); 
 	addDiffTypes();
 	return 0;
 }

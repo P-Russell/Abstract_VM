@@ -7,6 +7,9 @@
 #include <stdexcept>
 #include <climits>
 #include <sstream>
+#include <cstdlib>
+#include <string>
+#include <cmath>
 #include "IOperand.hpp"
 #include "eOperandType.hpp"
 #include "Error.hpp"
@@ -41,30 +44,13 @@ class Operand : public IOperand {
 		T getValue(void) const { return _value; }
 
 		virtual IOperand const * operator + (IOperand const & rhs) const;
-		virtual IOperand const * operator - (IOperand const & rhs) const {(void)rhs; return this; }
-		virtual IOperand const * operator * (IOperand const & rhs) const {(void)rhs; return this; }
-		virtual IOperand const * operator / (IOperand const & rhs) const {(void)rhs; return this; }
-		virtual IOperand const * operator % (IOperand const & rhs) const {(void)rhs; return this; }
-/*
-		virtual std::string const & toString(void) const
-		{
-			std::stringstream ss;
-			ss << "Address: " << this;
-			ss << " Value: " << this->_value;
-			ss << " Precision: " << this->_precision;
-			const std::string *ret = new std::string(ss.str());
-			return *ret;
-		}
-*/
-/*		virtual std::string const & toString(void) const
-		{
-			std::stringstream ss;
-			ss << this->_value;
-			const std::string *ret = new std::string(ss.str());
-			return *ret;
-		}
-*/
+		virtual IOperand const * operator - (IOperand const & rhs) const;
+		virtual IOperand const * operator * (IOperand const & rhs) const;
+		virtual IOperand const * operator / (IOperand const & rhs) const;
+		virtual IOperand const * operator % (IOperand const & rhs) const;
+		
 		virtual std::string const & toString(void) const { return this->_valueString; }
+
 	private:
 		T _value;
 		int _precision;
@@ -73,10 +59,10 @@ class Operand : public IOperand {
 };
 
 #include "Operand.add.hpp"
-/*
+
 #include "Operand.subtract.hpp"
 #include "Operand.multiply.hpp"
 #include "Operand.divide.hpp"
 #include "Operand.modulo.hpp"
-*/
+
 #endif
