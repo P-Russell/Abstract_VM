@@ -12,7 +12,8 @@ public:
 	//add constructor, destructor, assignment and copy constructor
 	Stack();
 	~Stack();
-
+	Stack(const Stack & rhs);
+	Stack & operator = (const Stack & rhs);
 	void push(IOperand const * operand);
 	void add();
 	void subtract();

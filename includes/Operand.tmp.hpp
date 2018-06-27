@@ -24,10 +24,10 @@ class Operand : public IOperand {
 
 	public:
 		Operand<T>(void) {}
-		Operand<T>(T value, int type, std::string valueString): _value(value), _precision(sizeof(value)), _valueString(valueString) {
+		Operand<T>(T value, int type, std::string valueString): _value(value), _precision(type), _valueString(valueString) {
 			this->_type.setType(type);
 		}					
-		Operand<T>(T value, eOperandType type, std::string valueString): _value(value), _precision(sizeof(value), _valueString(valueString)) {
+		Operand<T>(T value, eOperandType type, std::string valueString): _value(value), _precision(type.getType()), _valueString(valueString) {
 			this->_type = type;
 	}					
 	~Operand<T>(void) {}
@@ -35,6 +35,8 @@ class Operand : public IOperand {
 	Operand & operator=(const Operand<T> & rhs) {
 		this->_value = rhs._value;
 		this->_precision = rhs._precision;
+		this->_valueString = rhs._valueString;
+		this->_type = rhs._type;
 			return *this;
 		};
 

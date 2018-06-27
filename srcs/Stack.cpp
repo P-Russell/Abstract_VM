@@ -10,6 +10,17 @@ Stack::~Stack()
 	_stack.clear();
 }
 
+Stack::Stack(const Stack & rhs)
+{
+	this->_stack = rhs._stack;
+}
+
+Stack & Stack::operator = (const Stack & rhs)
+{
+	this->_stack = rhs._stack;
+	return *this;
+}
+
 size_t Stack::size() { return _stack.size(); }
 
 void Stack::push(IOperand const * operand)
