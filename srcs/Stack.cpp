@@ -28,13 +28,14 @@ void Stack::push(IOperand const * operand)
 	_stack.push_back(operand);
 }
 
-void Stack::pop()
+IOperand const * Stack::pop()
 {
 	if (_stack.size() <= 0)
 		throw Error::empty_stack();
-	const IOperand *op1 = _stack.back();
-	delete op1;
+	const IOperand *op = _stack.back();
 	_stack.pop_back();
+
+	return (op);
 }
 
 void Stack::dump()
@@ -68,7 +69,7 @@ void Stack::subtract()
 	const IOperand *op2 = _stack.back();
 	_stack.pop_back();
 	
-	_stack.push_back(*op1 - *op2);
+	_stack.push_back(*op2 - *op1);
 	
 	delete op1;
 	delete op2;
@@ -98,7 +99,7 @@ void Stack::divide()
 	const IOperand *op2 = _stack.back();
 	_stack.pop_back();
 	
-	_stack.push_back(*op1 / *op2);
+	_stack.push_back(*op2 / *op1);
 	
 	delete op1;
 	delete op2;
@@ -113,7 +114,7 @@ void Stack::modulo()
 	const IOperand *op2 = _stack.back();
 	_stack.pop_back();
 	
-	_stack.push_back(*op1 % *op2);
+	_stack.push_back(*op2 % *op1);
 	
 	delete op1;
 	delete op2;

@@ -23,7 +23,7 @@ public:
 	void dump();
 	void assert();
 	size_t size();
-	void pop();
+	IOperand const * pop();
 	void assert(IOperand const * operand);
 private:
 	std::list<IOperand const *> _stack;
