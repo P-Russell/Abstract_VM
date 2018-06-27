@@ -22,6 +22,21 @@ TEST(can_subtract_on_stack, set1)
 	EXPECT_EQ(std::stod(stack.pop()->toString()), 6);
 }
 
+TEST(stack_can_throw, set1)
+{
+	Factory fa;
+	Stack stack;
+	
+	stack.push(fa.createOperand(eOperandType::INT_8, "10"));
+	EXPECT_THROW(stack.subtract(), Error::not_enough_operands);
+	stack.pop();
+    EXPECT_THROW(stack.pop(), Error::empty_stack);
+	stack.push(fa.createOperand(eOperandType::INT_8, "10"));
+	stack.push(fa.createOperand(eOperandType::INT_8, "0"));
+    EXPECT_THROW(stack.modulo(), Error::modulo_by_zero);
+    EXPECT_THROW(stack.divide(), Error::divide_by_zero);
+}
+
 TEST(can_divide_on_stack, set1)
 {
 	Factory fa;

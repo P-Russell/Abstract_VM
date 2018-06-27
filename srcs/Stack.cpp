@@ -98,11 +98,16 @@ void Stack::divide()
 	_stack.pop_back();
 	const IOperand *op2 = _stack.back();
 	_stack.pop_back();
-	
-	_stack.push_back(*op2 / *op1);
-	
-	delete op1;
-	delete op2;
+	try {	
+		_stack.push_back(*op2 / *op1);
+		delete op1;
+		delete op2;
+	} catch (std::exception & e)
+	{
+		_stack.push_back(op2);
+		_stack.push_back(op1);
+		throw Error::divide_by_zero();
+	}
 }
 
 void Stack::modulo()
@@ -114,10 +119,16 @@ void Stack::modulo()
 	const IOperand *op2 = _stack.back();
 	_stack.pop_back();
 	
-	_stack.push_back(*op2 % *op1);
-	
-	delete op1;
-	delete op2;
+	try {	
+		_stack.push_back(*op2 % *op1);
+		delete op1;
+		delete op2;
+	} catch (std::exception & e)
+	{
+		_stack.push_back(op2);
+		_stack.push_back(op1);
+		throw Error::modulo_by_zero();
+	}
 }
 
 void Stack::assert(IOperand const * operand)
