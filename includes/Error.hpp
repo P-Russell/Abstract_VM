@@ -24,6 +24,18 @@ class Error {
 					return "not enough operands on stack";
 				}
 		};
+		class assert_fail : public std::exception {
+			public:
+				virtual const char* what() const throw() {
+					return "assert false";
+				}
+		};
+		class empty_stack : public std::exception {
+			public:
+				virtual const char* what() const throw() {
+					return "pop on empty stack";
+				}
+		};
 		virtual const char* what() const throw() { 
 			return "Unknown Error!"; 
 		}
