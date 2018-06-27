@@ -131,10 +131,12 @@ void Stack::modulo()
 	}
 }
 
-void Stack::assert(IOperand const * operand)
+bool Stack::assertThat(IOperand const * operand)
 {
 	const IOperand * cmp = _stack.back();
 	if (cmp->getType() != operand->getType() || 
 			cmp->toString().compare(operand->toString()) != 0)
 		throw Error::assert_fail();
+	
+	return true;
 }

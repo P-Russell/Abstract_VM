@@ -24,7 +24,7 @@ public:
 	void assert();
 	size_t size();
 	IOperand const * pop();
-	void assert(IOperand const * operand);
+	bool assertThat(IOperand const * operand);
 private:
 	std::list<IOperand const *> _stack;
 };

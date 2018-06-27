@@ -35,6 +35,9 @@ TEST(stack_can_throw, set1)
 	stack.push(fa.createOperand(eOperandType::INT_8, "0"));
     EXPECT_THROW(stack.modulo(), Error::modulo_by_zero);
     EXPECT_THROW(stack.divide(), Error::divide_by_zero);
+	EXPECT_THROW(stack.assertThat(fa.createOperand(eOperandType::INT_16, "0")), Error::assert_fail);
+	EXPECT_THROW(stack.assertThat(fa.createOperand(eOperandType::INT_8, "1")), Error::assert_fail);
+	EXPECT_TRUE(stack.assertThat(fa.createOperand(eOperandType::INT_8, "0")));
 }
 
 TEST(can_divide_on_stack, set1)
