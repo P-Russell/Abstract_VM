@@ -13,7 +13,7 @@ IOperand const * Operand<T>::operator % (IOperand const & rhs) const {
 
 	if(resultType == eOperandType::INT_8 || resultType == eOperandType::INT_16 || resultType == eOperandType::INT_32) {
 		long val = std::stol(rhs.toString());
-		return factory.createOperand(resultType, std::to_string(this->_value - std::floor(this->_value / val) * val));
+		return factory.createOperand(resultType, std::to_string(static_cast<int>(this->_value - std::floor(this->_value / val) * val)));
 	}
 
 	double val = std::stod(rhs.toString());

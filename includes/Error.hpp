@@ -1,3 +1,6 @@
+#ifndef ERROR_HPP
+#define ERROR_HPP
+
 #include <iostream>
 #include <exception>
 
@@ -15,10 +18,10 @@ class Error {
 					return "modulo by zero";
 				}
 		};
-		class invalid_arguments_for_operation : public std::exception {
+		class not_enough_operands : public std::exception {
 			public:
 				virtual const char* what() const throw() {
-					return "invalid arguments for % operator. Expected discrete values";
+					return "not enough operands on stack";
 				}
 		};
 		virtual const char* what() const throw() { 
@@ -26,21 +29,4 @@ class Error {
 		}
 };
 
-/*
-std::string  check(int i) {
-	if (i < 0)
-		throw Error::Negative();
-	if (i > 0)
-		throw Error::Positive();
-	return ("True");
-}
-
-int main() {
-	try {
-		std::cout << check(-10) << std::endl;
-	}
-	catch (std::exception & e) {
-		std::cout << e.what() << std::endl;
-	}
-}
-*/
+#endif

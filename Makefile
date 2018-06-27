@@ -51,7 +51,7 @@ run:
 	./$(BUILDDIR)/$(NAME)
 test:
 	@echo "$(OK)----------   Compile $(NAME)    ----------$(NONE)"
-	@$(COMPILER) -o $(TESTDIR)/$(NAME) $(TESTSRCS) $(TESTFILES) $(FLAGS)$(HEADERDIR) tests/gtest/gtest_main.a -lpthread
+	@$(COMPILER) -o $(TESTDIR)/$(NAME) $(TESTSRCS) $(TESTFILES) $(FLAGS)$(HEADERDIR) tests/gtest/gtest_main.a -lpthread 
 	@echo "$(OK)----------     Success     ----------$(NONE)\n"
 	./$(TESTDIR)/$(NAME)
 

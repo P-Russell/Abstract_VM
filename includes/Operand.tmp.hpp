@@ -6,6 +6,7 @@
 #include <limits>
 #include <stdexcept>
 #include <climits>
+#include <iomanip>
 #include <sstream>
 #include <cstdlib>
 #include <string>
@@ -23,19 +24,17 @@ class Operand : public IOperand {
 
 	public:
 		Operand<T>(void) {}
-		Operand<T>(T value, int type): _value(value), _precision(sizeof(value)) {
+		Operand<T>(T value, int type, std::string valueString): _value(value), _precision(sizeof(value)), _valueString(valueString) {
 			this->_type.setType(type);
-			this->_valueString = std::to_string(this->_value);
 		}					
-		Operand<T>(T value, eOperandType type): _value(value), _precision(sizeof(value)) {
+		Operand<T>(T value, eOperandType type, std::string valueString): _value(value), _precision(sizeof(value), _valueString(valueString)) {
 			this->_type = type;
-			this->_valueString = std::to_string(this->_value);
-		}					
-		~Operand<T>(void) {}
+	}					
+	~Operand<T>(void) {}
 
-		Operand & operator=(const Operand<T> & rhs) {
-			this->_value = rhs._value;
-			this->_precision = rhs._precision;
+	Operand & operator=(const Operand<T> & rhs) {
+		this->_value = rhs._value;
+		this->_precision = rhs._precision;
 			return *this;
 		};
 
@@ -53,13 +52,13 @@ class Operand : public IOperand {
 		virtual IOperand const * operator / (IOperand const & rhs) const;
 		virtual IOperand const * operator % (IOperand const & rhs) const;
 		
-		virtual std::string const & toString(void) const { return this->_valueString; }
+		virtual std::string const & toString(void) const { return _valueString; }
 
 	private:
 		T _value;
 		int _precision;
-		eOperandType _type;
 		std::string _valueString;
+		eOperandType _type;
 		Factory factory;
 };
 
