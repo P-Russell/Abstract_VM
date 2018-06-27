@@ -9,6 +9,12 @@ class Error {
 					return "divide by zero";
 				}
 		};
+		class modulo_by_zero : public std::exception {
+			public:
+				virtual const char* what() const throw() {
+					return "modulo by zero";
+				}
+		};
 		class invalid_arguments_for_operation : public std::exception {
 			public:
 				virtual const char* what() const throw() {

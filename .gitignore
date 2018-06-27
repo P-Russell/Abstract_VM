@@ -37,3 +37,4 @@ build/
 tests/avm
 trash
 tests/avm
+.vscode

@@ -48,10 +48,10 @@ class Operand : public IOperand {
 		T getValue(void) const { return _value; }
 
 		virtual IOperand const * operator + (IOperand const & rhs) const;
-		virtual IOperand const * operator - (IOperand const & rhs) const {(void) rhs; return this; }
-		virtual IOperand const * operator * (IOperand const & rhs) const {(void) rhs; return this; }
-		virtual IOperand const * operator / (IOperand const & rhs) const {(void) rhs; return this; }
-		virtual IOperand const * operator % (IOperand const & rhs) const {(void) rhs; return this; }
+		virtual IOperand const * operator - (IOperand const & rhs) const;
+		virtual IOperand const * operator * (IOperand const & rhs) const;
+		virtual IOperand const * operator / (IOperand const & rhs) const;
+		virtual IOperand const * operator % (IOperand const & rhs) const;
 		
 		virtual std::string const & toString(void) const { return this->_valueString; }
 
@@ -64,10 +64,9 @@ class Operand : public IOperand {
 };
 
 #include "Operand.add.hpp"
-/*
 #include "Operand.subtract.hpp"
 #include "Operand.multiply.hpp"
 #include "Operand.divide.hpp"
 #include "Operand.modulo.hpp"
-*/
+
 #endif

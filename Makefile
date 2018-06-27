@@ -14,6 +14,8 @@ BUILDDIR = build
 
 FLAGS = -std=c++11 -Wall -Werror -Wextra -iquote
 
+TESTFLAGS = -std=c++11 -iquote
+
 COMPILER = clang++
 
 NONE = \x1b[0m
@@ -49,8 +51,9 @@ run:
 	./$(BUILDDIR)/$(NAME)
 test:
 	@echo "$(OK)----------   Compile $(NAME)    ----------$(NONE)"
-	@$(COMPILER) -o $(TESTDIR)/$(NAME) $(TESTSRCS) $(TESTFILES) $(FLAGS)$(HEADERDIR) tests/gtest/gtest_main.a
+	@$(COMPILER) -o $(TESTDIR)/$(NAME) $(TESTSRCS) $(TESTFILES) $(FLAGS)$(HEADERDIR) tests/gtest/gtest_main.a -lpthread
 	@echo "$(OK)----------     Success     ----------$(NONE)\n"
+	./$(TESTDIR)/$(NAME)
 
 runt:
 	./$(TESTDIR)/$(NAME)

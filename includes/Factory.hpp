@@ -1,7 +1,7 @@
 #ifndef FACTORY_HPP
 #define FACTORY_HPP
 
-#include "Operand.tmp.hpp"
+#include "IOperand.hpp"
 
 class Factory
 {
