@@ -62,10 +62,10 @@ class Operand : public IOperand {
 		Factory factory;
 };
 
-#include "Operand.add.hpp"
-#include "Operand.subtract.hpp"
-#include "Operand.multiply.hpp"
-#include "Operand.divide.hpp"
-#include "Operand.modulo.hpp"
+#include "operators/Operand.add.hpp"
+#include "operators/Operand.subtract.hpp"
+#include "operators/Operand.multiply.hpp"
+#include "operators/Operand.divide.hpp"
+#include "operators/Operand.modulo.hpp"
 
 #endif

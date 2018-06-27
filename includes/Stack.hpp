@@ -9,6 +9,7 @@
 
 class Stack {
 public:
+	//add constructor, destructor, assignment and copy constructor
 	void push(IOperand const * operand);
 	void add();
 	void subtract();
