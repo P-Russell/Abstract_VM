@@ -7,7 +7,6 @@ Input::Input() {}
 
 Input::~Input()
 {
-	std::cout << "destructor called " << std::endl;
 	std::list<Line *>::iterator it;
 	for (it = _lines.begin(); it != _lines.end(); it++)
 		delete *it;
@@ -115,6 +114,11 @@ bool validOp(std::string t)
 	return false;
 }
 
+void Input::saveLine(Line * line)
+{
+	this->_lines.push_back(line);
+}
+
 bool Input::validateLine(Line *line_struct)
 {
 	std::string line = line_struct->line;
@@ -146,7 +150,7 @@ bool Input::validateLine(Line *line_struct)
 		std::string number = typeAndValue.substr((firstParen + 1), secondParen - firstParen - 1);
 		trim(number);
 
-		size_t dataPulled = operation.length() + type.length() + number.length() + 3; // plus one for white space and two for paren
+		size_t dataPulled = operation.length() + type.length() + number.length() + 3; 
 		if (dataPulled != line.length())
 			throw Error::invalid_syntax();
 
@@ -160,6 +164,21 @@ bool Input::validateLine(Line *line_struct)
 
 	line_struct->operation = line;
 	return true;
+}
+
+void Input::checkExit()
+{
+	Line * line = _lines.back();
+	if (line->operation.compare("exit") != 0)
+		throw Error::invalid_syntax();
+}
+
+Line * Input::getNext()
+{
+	Line * line = _lines.front();
+	_lines.pop_front();
+	return line;
+
 }
 
 bool Input::getLinesFromFile(std::string filename)

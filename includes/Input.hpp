@@ -7,15 +7,7 @@
 #include <list>
 
 #include "Error.hpp"
-
-typedef struct Line 
-{
-	int line_num;
-	std::string line;
-	std::string value;
-	std::string type;
-	std::string operation;
-}Line;
+#include "Line.hpp"
 
 class Input {
 	public:
@@ -23,9 +15,12 @@ class Input {
 		~Input();
 		Input(const Input & rhs);
 		Input & operator = (const Input & rhs);
+		void saveLine(Line * line);
 		void dumpLines();
 		bool getLinesFromFile(std::string filename);
 		bool validateLine(Line * line_struct);
+		void checkExit();
+		Line * getNext();
 	private:
 		std::list< Line * > _lines;
 };
