@@ -12,7 +12,7 @@ class eOperandType {
 			DOUBLE
 		};
 		eOperandType(int type = DOUBLE): _type(type) {}
-		~eOperandType(void) {}
+		~eOperandType(void);
 		eOperandType(const eOperandType & rhs) : _type(rhs._type) {}
 		eOperandType & operator = (const eOperandType & rhs);
 		eOperandType & operator = (const int & rhs);

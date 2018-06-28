@@ -12,6 +12,8 @@ eOperandType & eOperandType::operator = (const int & rhs) {
 	return *this;
 }
 
+eOperandType::~eOperandType() {}
+
 void eOperandType::setType(int type){
 	this->_type = type;
 }

@@ -1,0 +1,7 @@
+ line1
+
+;this line contains a comment
+this line is not a comment
+	line2
+;;
+line3

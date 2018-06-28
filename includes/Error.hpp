@@ -36,6 +36,18 @@ class Error {
 					return "pop on empty stack";
 				}
 		};
+		class invalid_file_name: public std::exception {
+			public:
+				virtual const char* what() const throw() {
+					return "invalid file name";
+				}
+		};
+		class invalid_syntax: public std::exception {
+			public:
+				virtual const char* what() const throw() {
+					return "invalid syntax";
+				}
+		};
 		virtual const char* what() const throw() { 
 			return "Unknown Error!"; 
 		}
