@@ -2,6 +2,7 @@
 #include <cctype>
 #include <locale>
 #include "Input.hpp"
+#include "eOperandType.hpp"
 
 Input::Input() {}
 
@@ -76,19 +77,19 @@ void Input::dumpLines()
 	}
 }
 
-bool validType(std::string t)
+int validType(std::string t)
 {
 	if (t.compare("int8") == 0)
-		return true;
+		return eOperandType::INT_8;
 	if (t.compare("int16") == 0)
-		return true;
+		return eOperandType::INT_16;
 	if (t.compare("int32") == 0)
-		return true;
+		return eOperandType::INT_32;
 	if (t.compare("float") == 0)
-		return true;
+		return eOperandType::FLOAT;
 	if (t.compare("double") == 0)
-		return true;
-	return false;
+		return eOperandType::DOUBLE;
+	return -1;
 }
 
 bool validOp(std::string t)
@@ -144,7 +145,7 @@ bool Input::validateLine(Line *line_struct)
 
 		std::string type = typeAndValue.substr(0, firstParen);
 		trim(type);
-		if (!validType(type))
+		if (validType(type) == -1)
 			throw Error::invalid_syntax();
 
 		std::string number = typeAndValue.substr((firstParen + 1), secondParen - firstParen - 1);
@@ -155,7 +156,7 @@ bool Input::validateLine(Line *line_struct)
 			throw Error::invalid_syntax();
 
 		line_struct->operation = operation;
-		line_struct->type = type;
+		line_struct->type = validType(type);
 		line_struct->value = number;
 		return true;
 	}
@@ -178,7 +179,13 @@ Line * Input::getNext()
 	Line * line = _lines.front();
 	_lines.pop_front();
 	return line;
+}
 
+bool Input::moreToExec()
+{
+	if (_lines.size() > 0)
+		return true;
+	return false;
 }
 
 bool Input::getLinesFromFile(std::string filename)

@@ -1,1 +1,5 @@
 when creating and operand instance - check that number fits inside type
+
+In order to choose the right member function for the creation of the new IOperand,
+you MUST create and use an array (here, a vector shows little interest) of pointers on
+member functions with enum values as index.

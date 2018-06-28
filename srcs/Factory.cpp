@@ -17,6 +17,14 @@ IOperand const * Factory::createOperand( eOperandType type, std::string const & 
 		default:
 			return Factory::createDouble(value);
 	}
+
+/*	typedef IOperand const * (*fn)( std::string );
+
+    static fn funcs[] = { add, sub, mul, div };
+    
+    assert( op < 4 && op >= 0 );
+    return funcs[ op ]( a, b );
+*/
 }
 
 IOperand const * Factory::createInt8( std::string const & value ) const

@@ -48,6 +48,12 @@ class Error {
 					return "invalid syntax";
 				}
 		};
+		class print_fail: public std::exception {
+			public:
+				virtual const char* what() const throw() {
+					return "last item on stack not int8";
+				}
+		};
 		virtual const char* what() const throw() { 
 			return "Unknown Error!"; 
 		}

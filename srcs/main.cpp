@@ -7,11 +7,34 @@
 #include "Factory.hpp"
 #include "Input.hpp"
 #include "Line.hpp"
-/*
-void execInstruction(Line * instruction)
+
+void execInstruction(Input & input)
 {
+	Stack stack;
+	Factory factory;
+	Line * line;
+
+	while (input.moreToExec())
+	{
+		line = input.getNext();
+		if (line->operation.compare("pop") == 0) { stack.pop(); }
+		else if (line->operation.compare("dump") == 0) { stack.dump(); }
+		else if (line->operation.compare("add") == 0) { stack.add(); }
+		else if (line->operation.compare("sub") == 0) { stack.subtract(); }
+		else if (line->operation.compare("mul") == 0) { stack.multiply(); }
+		else if (line->operation.compare("div") == 0) { stack.divide(); }
+		else if (line->operation.compare("mod") == 0) { stack.modulo(); }
+		else if (line->operation.compare("print") == 0) { stack.print(); }
+		else if (line->operation.compare("exit") == 0) { stack.clear(); }
+		else if (line->operation.compare("push") == 0) {
+			stack.push(factory.createOperand(eOperandType(line->type), line->value));
+		}
+		else if (line->operation.compare("assert") == 0) {
+			stack.assertThat(factory.createOperand(eOperandType(line->type), line->value));
+		}
+	}
 }
-*/
+
 int main (int argc, char **argv)
 {
 	Input input;
@@ -20,12 +43,9 @@ int main (int argc, char **argv)
 	if (argc == 2) {
 		try {
 			valid = input.getLinesFromFile(argv[1]);
-//			input.dumpLines();
 		} catch (Error::invalid_file_name & e) {
 			std::cout << e.what() << std::endl;
 		}
-		if (valid)
-			std::cout << "Totally valid file";
 	}
 	else 
 	{
@@ -47,10 +67,10 @@ int main (int argc, char **argv)
 				std::cout << e.what() << std::endl;
 			}
 		}
-//		input.dumpLines();
 	}
 	try {
 		input.checkExit();
+		execInstruction(input);
 	} catch (std::exception & e) {
 		std::cout << e.what() << std::endl;
 	}

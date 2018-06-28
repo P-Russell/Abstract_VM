@@ -10,6 +10,14 @@ Stack::~Stack()
 	_stack.clear();
 }
 
+void Stack::clear()
+{
+	std::list<const IOperand *>::iterator it;
+	for (it = _stack.begin(); it !=  _stack.end() ; it++)
+		delete *it;
+	_stack.clear();
+}
+
 Stack::Stack(const Stack & rhs)
 {
 	this->_stack = rhs._stack;
@@ -36,6 +44,13 @@ IOperand const * Stack::pop()
 	_stack.pop_back();
 
 	return (op);
+}
+
+void Stack::print()
+{
+	const IOperand * cmp = _stack.back();
+	if (cmp->getType() != eOperandType::INT_8)
+		throw Error::print_fail();
 }
 
 void Stack::dump()
@@ -135,8 +150,10 @@ bool Stack::assertThat(IOperand const * operand)
 {
 	const IOperand * cmp = _stack.back();
 	if (cmp->getType() != operand->getType() || 
-			cmp->toString().compare(operand->toString()) != 0)
+			cmp->toString().compare(operand->toString()) != 0) {
+		delete operand;
 		throw Error::assert_fail();
-	
+			}
+	delete operand;
 	return true;
 }

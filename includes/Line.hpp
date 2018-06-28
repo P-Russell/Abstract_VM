@@ -9,7 +9,7 @@ public:
 	int line_num;
 	std::string line;
 	std::string value;
-	std::string type;
+	int type;
 	std::string operation;
 	Line();
 	~Line();

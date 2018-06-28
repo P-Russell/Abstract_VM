@@ -23,6 +23,8 @@ public:
 	void dump();
 	void assert();
 	size_t size();
+	void clear();
+	void print();
 	IOperand const * pop();
 	bool assertThat(IOperand const * operand);
 private:

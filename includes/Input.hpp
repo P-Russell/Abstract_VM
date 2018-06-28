@@ -20,6 +20,7 @@ class Input {
 		bool getLinesFromFile(std::string filename);
 		bool validateLine(Line * line_struct);
 		void checkExit();
+		bool moreToExec();
 		Line * getNext();
 	private:
 		std::list< Line * > _lines;
