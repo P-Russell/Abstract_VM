@@ -69,11 +69,9 @@ void Input::dumpLines()
 	for (it = _lines.begin(); it != _lines.end(); it++)
 	{
 		if ((*it)->operation.compare("push") == 0 || (*it)->operation.compare("assert") == 0)
-			std::cout << "line number:" <<(*it)->line_num << "; Raw input:" << (*it)->line << "; Operation:" << (*it)->operation << 
-			"; Type:" << (*it)->type << "; Value:" << (*it)->value << ";" <<  std::endl;
+			std::cout << "line number:" << (*it)->line_num << "; Raw input:" << (*it)->line << "; Operation:" << (*it)->operation << "; Type:" << (*it)->type << "; Value:" << (*it)->value << ";" << std::endl;
 		else
-			std::cout << "line number:" << (*it)->line_num << 
-			"; Raw input:" << (*it)->line << "; Operation:" << (*it)->operation << ";" <<std::endl;
+			std::cout << "line number:" << (*it)->line_num << "; Raw input:" << (*it)->line << "; Operation:" << (*it)->operation << ";" << std::endl;
 	}
 }
 
@@ -115,9 +113,36 @@ bool validOp(std::string t)
 	return false;
 }
 
-void Input::saveLine(Line * line)
+void Input::saveLine(Line *line)
 {
 	this->_lines.push_back(line);
+}
+
+bool isNumber(const std::string& number) {
+    std::string::size_type pos = 0;
+	bool decimalFound = false;
+
+	if (number.length() >= 18)
+		return false;
+	
+    if (number[pos] == '-' || number[pos] == '+') {
+        ++pos;
+    }
+    
+	if (number[pos] == '.') {
+        return false;
+    }
+
+    for (; pos < number.size(); ++pos) {
+        if (!std::isdigit(number[pos])) {
+			if (number[pos] == '.' and !decimalFound)
+				decimalFound = true;
+			else
+    	        return false;
+        }
+    }
+
+    return !number.empty();
 }
 
 bool Input::validateLine(Line *line_struct)
@@ -150,14 +175,21 @@ bool Input::validateLine(Line *line_struct)
 
 		std::string number = typeAndValue.substr((firstParen + 1), secondParen - firstParen - 1);
 		trim(number);
+		if (!isNumber(number))
+			throw Error::invalid_syntax();
 
-		size_t dataPulled = operation.length() + type.length() + number.length() + 3; 
+		size_t dataPulled = operation.length() + type.length() + number.length() + 3;
 		if (dataPulled != line.length())
 			throw Error::invalid_syntax();
 
 		line_struct->operation = operation;
 		line_struct->type = validType(type);
-		line_struct->value = number;
+		size_t decimal;
+		if ((type.compare("float") != 0 && type.compare("double") != 0) && (decimal = number.find(".")) != std::string::npos)
+			line_struct->value = number.substr(0, decimal);
+		else
+			line_struct->value = number;
+
 		return true;
 	}
 	if (!validOp(line))
@@ -169,14 +201,14 @@ bool Input::validateLine(Line *line_struct)
 
 void Input::checkExit()
 {
-	Line * line = _lines.back();
+	Line *line = _lines.back();
 	if (line->operation.compare("exit") != 0)
 		throw Error::invalid_syntax();
 }
 
-Line * Input::getNext()
+Line *Input::getNext()
 {
-	Line * line = _lines.front();
+	Line *line = _lines.front();
 	_lines.pop_front();
 	return line;
 }
@@ -219,12 +251,15 @@ bool Input::getLinesFromFile(std::string filename)
 	bool flag = true;
 	std::list<Line *>::iterator it;
 	for (it = _lines.begin(); it != _lines.end(); it++)
-		try {
+		try
+		{
 			validateLine((*it));
-		} catch (Error::invalid_syntax & e) {
+		}
+		catch (Error::invalid_syntax &e)
+		{
 			std::cout << e.what() << " on line " << (*it)->line_num << " : " << (*it)->line << std::endl;
 			flag = false;
 		}
-	
+
 	return flag;
 }
