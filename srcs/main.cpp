@@ -57,7 +57,8 @@ int main (int argc, char **argv)
 			
 			if (userInput.line.compare(";;") == 0)
 				break;
-			
+
+			if (!input.isComment(userInput.line))	
 			try {
 				input.validateLine(&userInput);
 				Line *validated = new Line;

@@ -36,14 +36,13 @@ void Stack::push(IOperand const * operand)
 	_stack.push_back(operand);
 }
 
-IOperand const * Stack::pop()
+void Stack::pop()
 {
 	if (_stack.size() <= 0)
 		throw Error::empty_stack();
 	const IOperand *op = _stack.back();
 	_stack.pop_back();
-
-	return (op);
+	delete op;
 }
 
 void Stack::print()
@@ -51,13 +50,14 @@ void Stack::print()
 	const IOperand * cmp = _stack.back();
 	if (cmp->getType() != eOperandType::INT_8)
 		throw Error::print_fail();
+	std::cout << static_cast<char>(std::stoi(cmp->toString())) << std::endl;
 }
 
 void Stack::dump()
 {
 	std::list<const IOperand *>::iterator it;
 	for (it = _stack.begin(); it !=  _stack.end() ; it++)
-		std::cout << (*it)->toString() << std::endl;
+		std::cout << std::stod((*it)->toString()) << std::endl;
 }
 
 void Stack::add()

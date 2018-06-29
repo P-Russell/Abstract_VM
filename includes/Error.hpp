@@ -9,53 +9,53 @@ class Error {
 		class divide_by_zero : public std::exception {
 			public:
 				virtual const char* what() const throw() {
-					return "divide by zero";
+					return "Error: divide by zero";
 				}
 		};
 		class modulo_by_zero : public std::exception {
 			public:
 				virtual const char* what() const throw() {
-					return "modulo by zero";
+					return "Error: modulo by zero";
 				}
 		};
 		class not_enough_operands : public std::exception {
 			public:
 				virtual const char* what() const throw() {
-					return "not enough operands on stack";
+					return "Error: not enough operands on stack";
 				}
 		};
 		class assert_fail : public std::exception {
 			public:
 				virtual const char* what() const throw() {
-					return "assert false";
+					return "Error: assert false";
 				}
 		};
 		class empty_stack : public std::exception {
 			public:
 				virtual const char* what() const throw() {
-					return "pop on empty stack";
+					return "Error: pop on empty stack";
 				}
 		};
 		class invalid_file_name: public std::exception {
 			public:
 				virtual const char* what() const throw() {
-					return "invalid file name";
+					return "Error: invalid file name";
 				}
 		};
 		class invalid_syntax: public std::exception {
 			public:
 				virtual const char* what() const throw() {
-					return "invalid syntax";
+					return "Error: invalid syntax";
 				}
 		};
 		class print_fail: public std::exception {
 			public:
 				virtual const char* what() const throw() {
-					return "last item on stack not int8";
+					return "Error: last item on stack not int8";
 				}
 		};
 		virtual const char* what() const throw() { 
-			return "Unknown Error!"; 
+			return "Error: Unknown Error!"; 
 		}
 };
 

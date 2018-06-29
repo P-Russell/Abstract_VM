@@ -21,6 +21,7 @@ class Input {
 		bool validateLine(Line * line_struct);
 		void checkExit();
 		bool moreToExec();
+		bool isComment(std::string &s);
 		Line * getNext();
 	private:
 		std::list< Line * > _lines;

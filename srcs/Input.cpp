@@ -50,7 +50,7 @@ static inline void trim(std::string &s)
 	rtrim(s);
 }
 
-bool isComment(std::string &s)
+bool Input::isComment(std::string &s)
 {
 	if (s[0] == ';')
 	{
