@@ -19,6 +19,19 @@ TEST(assertFloat, types1)
 	EXPECT_TRUE(stack.assertThat(fa.createOperand(d, "2.5")));
 }
 
+TEST(assertInt, types1)
+{
+	Factory fa;
+    Stack stack;
+	eOperandType i32(eOperandType::INT_32);
+	eOperandType i16(eOperandType::INT_16);
+
+    stack.push(fa.createOperand(i32, "5"));
+    stack.push(fa.createOperand(i16, "2"));
+    stack.divide();
+	EXPECT_TRUE(stack.assertThat(fa.createOperand(i32, "2")));
+}
+
 TEST(assertThrow, types1)
 {
 	Factory fa;
