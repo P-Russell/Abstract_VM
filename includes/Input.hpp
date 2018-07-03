@@ -23,6 +23,7 @@ class Input {
 		bool moreToExec();
 		bool isComment(std::string &s);
 		Line * getNext();
+		bool isEmpty();
 	private:
 		std::list< Line * > _lines;
 };

@@ -1,4 +1,5 @@
 #include "Stack.hpp"
+#include <iomanip>
 
 Stack::Stack() {}
 
@@ -47,6 +48,9 @@ void Stack::pop()
 
 void Stack::print()
 {
+	if (_stack.size() <= 0)
+		throw Error::empty_stack();
+
 	const IOperand * cmp = _stack.back();
 	if (cmp->getType() != eOperandType::INT_8)
 		throw Error::print_fail();
@@ -55,9 +59,15 @@ void Stack::print()
 
 void Stack::dump()
 {
-	std::list<const IOperand *>::iterator it;
-	for (it = _stack.begin(); it !=  _stack.end() ; it++)
+	std::list<const IOperand *>::reverse_iterator it;
+
+	for (it = _stack.rbegin(); it !=  _stack.rend() ; ++it) {
+		if ((*it)->getType() == eOperandType::FLOAT || (*it)->getType() == eOperandType::DOUBLE)
+			std::cout << std::fixed << std::setprecision(8);
+		else
+			std::cout << std::setprecision(0);
 		std::cout << std::stod((*it)->toString()) << std::endl;
+	}
 }
 
 void Stack::add()
@@ -148,12 +158,16 @@ void Stack::modulo()
 
 bool Stack::assertThat(IOperand const * operand)
 {
+	if (_stack.size() <= 0)
+		throw Error::empty_stack();
+
 	const IOperand * cmp = _stack.back();
 	if (cmp->getType() != operand->getType() || 
-			cmp->toString().compare(operand->toString()) != 0) {
+			std::stod(cmp->toString()) != std::stod(operand->toString())) 
+	{
 		delete operand;
 		throw Error::assert_fail();
-			}
+	}
 	delete operand;
 	return true;
 }

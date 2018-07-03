@@ -19,6 +19,13 @@ Input::Input(const Input &rhs)
 	this->_lines = rhs._lines;
 }
 
+bool Input::isEmpty()
+{
+	if (this->_lines.size() == 0)
+		throw Error::empty_file();
+	return false;
+}
+
 Input &Input::operator=(const Input &rhs)
 {
 	this->_lines = rhs._lines;
@@ -122,7 +129,7 @@ bool isNumber(const std::string& number) {
     std::string::size_type pos = 0;
 	bool decimalFound = false;
 
-	if (number.length() >= 18)
+	if (number.length() >= 30)
 		return false;
 	
     if (number[pos] == '-' || number[pos] == '+') {
@@ -148,6 +155,12 @@ bool isNumber(const std::string& number) {
 bool Input::validateLine(Line *line_struct)
 {
 	std::string line = line_struct->line;
+
+	size_t semiColon;
+	if ((semiColon = line.find(";")) != std::string::npos) {
+			line = line.substr(0, semiColon);
+			trim(line);
+	}
 	std::string operation;
 	if (line.find("push") != std::string::npos || line.find("assert") != std::string::npos)
 	{
@@ -201,9 +214,14 @@ bool Input::validateLine(Line *line_struct)
 
 void Input::checkExit()
 {
+	if (_lines.size() == 0)
+		throw Error::empty_file();
 	Line *line = _lines.back();
 	if (line->operation.compare("exit") != 0)
+	{
+		std::cout << "No exit " << std::endl;
 		throw Error::invalid_syntax();
+	}
 }
 
 Line *Input::getNext()

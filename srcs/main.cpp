@@ -35,45 +35,61 @@ void execInstruction(Input & input)
 	}
 }
 
-int main (int argc, char **argv)
+void runFromFile(std::string fileName)
 {
 	Input input;
-	bool valid;
+	bool valid;	
+	try {
+		valid = input.getLinesFromFile(fileName);
+		input.isEmpty();
+		if (valid) {
+		input.checkExit();
+		execInstruction(input);
+		}
+	} catch (std::exception & e) {
+		std::cout << e.what() << std::endl;
+	}
+}
+
+void runFromStdin()
+{
+	Input input;
 	Line userInput;
-	if (argc == 2) {
+
+	std::cout << "Reading from stdin." << std::endl;
+	int linesRead = 1;
+	while(true) {
+		std::getline(std::cin, userInput.line);
+		userInput.line_num = linesRead++;
+		
+		if (userInput.line.compare(";;") == 0)
+			break;
+
+		if (!input.isComment(userInput.line))	
 		try {
-			valid = input.getLinesFromFile(argv[1]);
-		} catch (Error::invalid_file_name & e) {
+			input.validateLine(&userInput);
+			Line *validated = new Line;
+			*validated = userInput;
+			input.saveLine(validated);
+		} catch (Error::invalid_syntax & e) {
 			std::cout << e.what() << std::endl;
 		}
 	}
-	else 
-	{
-		std::cout << "Reading from stdin." << std::endl;
-		int linesRead = 1;
-		while(true) {
-			std::getline(std::cin, userInput.line);
-			userInput.line_num = linesRead++;
-			
-			if (userInput.line.compare(";;") == 0)
-				break;
-
-			if (!input.isComment(userInput.line))	
-			try {
-				input.validateLine(&userInput);
-				Line *validated = new Line;
-				*validated = userInput;
-				input.saveLine(validated);
-			} catch (Error::invalid_syntax & e) {
-				std::cout << e.what() << std::endl;
-			}
-		}
-	}
 	try {
+		input.isEmpty();
 		input.checkExit();
 		execInstruction(input);
 	} catch (std::exception & e) {
 		std::cout << e.what() << std::endl;
 	}
+}
+
+int main (int argc, char **argv)
+{
+	Input input;
+	Line userInput;
+	if (argc == 2) { runFromFile(argv[1]); }
+	else 
+	{ runFromStdin(); }
 	return 0;
 }

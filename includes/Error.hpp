@@ -33,7 +33,13 @@ class Error {
 		class empty_stack : public std::exception {
 			public:
 				virtual const char* what() const throw() {
-					return "Error: pop on empty stack";
+					return "Error: empty stack";
+				}
+		};
+		class empty_file : public std::exception {
+			public:
+				virtual const char* what() const throw() {
+					return "Error: empty file";
 				}
 		};
 		class invalid_file_name: public std::exception {
