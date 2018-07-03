@@ -18,7 +18,7 @@ TEST(can_subtract_diff_types, types1)
 	EXPECT_EQ((*fa.createOperand(d, "25.5") - *fa.createOperand(i16, "20"))->toString(), "5.500000");
 	EXPECT_EQ((*fa.createOperand(i32, "25") - *fa.createOperand(f, "20.0"))->toString(), "5.000000");
 	EXPECT_TRUE((*fa.createOperand(i32, "25") - *fa.createOperand(f, "20.0"))->getType() == eOperandType::FLOAT);
-	EXPECT_THROW((*fa.createOperand(i32, std::to_string(-INT_MAX)) - *fa.createOperand(i32, "20"))->toString(), std::underflow_error);
+	EXPECT_THROW((*fa.createOperand(i32, std::to_string(-INT_MAX)) - *fa.createOperand(i32, "20"))->toString(), std::overflow_error);
 }
 
 TEST(can_multiply_diff_types, types1)

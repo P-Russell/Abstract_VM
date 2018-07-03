@@ -1,3 +1,5 @@
-push int8(32)
-add
+push int8(10)
+push float(5)
+div
+assert float(2)
 exit

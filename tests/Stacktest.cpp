@@ -15,7 +15,7 @@ TEST(can_subtract_on_stack, set1)
 	stack.push(fa.createOperand(eOperandType::INT_8, "10"));
 	stack.push(fa.createOperand(eOperandType::INT_16, "5"));
 	stack.subtract();
-	//EXPECT_EQ(std::stoi(stack.pop()->toString()), 5);
+	EXPECT_TRUE(stack.assertThat(fa.createOperand(eOperandType::INT_16, "5")));
 	stack.push(fa.createOperand(eOperandType::FLOAT, "24"));
 	stack.push(fa.createOperand(eOperandType::INT_8, "18"));
 	stack.subtract();
