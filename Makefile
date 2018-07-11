@@ -25,9 +25,7 @@ WARN = \x1b[33;01m
 all: $(BUILDDIR)/$(NAME)
 
 $(BUILDDIR)/$(NAME):
-	if [ ! -d "$(BUILDDIR)" ]; then \
-		mkdir $(BUILDDIR); \
-	fi 
+	@if [ ! -d "$(BUILDDIR)" ]; then @mkdir $(BUILDDIR); fi 
 
 	@echo "$(OK)----------   Compile $(NAME)    ----------$(NONE)"
 	@$(COMPILER) -o $(BUILDDIR)/$(NAME) $(SRCS) $(FLAGS)$(HEADERDIR)

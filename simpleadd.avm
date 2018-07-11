@@ -1,5 +1,0 @@
-push int32(20)
-push int32(20)
-add
-dump
-exit

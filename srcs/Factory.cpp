@@ -1,5 +1,6 @@
 #include "Factory.hpp"
 #include "Operand.tmp.hpp"
+#include <math.h>
 
 Factory::Factory() {}
 Factory::~Factory() {}
@@ -50,12 +51,18 @@ IOperand const *Factory::createFloat(std::string const &value) const
 		throw std::overflow_error("Overflow occured");
 	else if (val <= -FLT_MAX)
 		throw std::overflow_error("Overflow occured");
+	else if (fabs(val) < FLT_MIN)
+		throw std::underflow_error("Underflow occured");
 
 	return new Operand<float>(std::stof(value), eOperandType::FLOAT, value);
 }
 
 IOperand const *Factory::createDouble(std::string const &value) const
 {
+	long double val = std::stold(value);
+
+	if (fabs(val) < DBL_MIN)
+		throw std::underflow_error("Underflow occured");
 	return new Operand<double>(std::stod(value), eOperandType::DOUBLE, value);
 }
 

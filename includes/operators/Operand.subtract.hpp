@@ -18,6 +18,5 @@ IOperand const * Operand<T>::operator - (IOperand const & rhs) const {
 		throw std::overflow_error("Overflow occured");
 	else if ((val < 0) && (val < -DBL_MAX + this->_value))
 		throw std::overflow_error("Overflow occured");
-
 	return factory.createOperand(resultType, std::to_string(this->_value - val));
 }
