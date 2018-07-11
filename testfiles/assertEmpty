@@ -1,0 +1,2 @@
+assert float(32.5)
+exit
