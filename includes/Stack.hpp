@@ -21,7 +21,6 @@ public:
 	void divide();
 	void modulo();
 	void dump();
-	bool assert();
 	size_t size();
 	void clear();
 	void print();
